@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// SQLite does not support Enums, so we use String
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  image         String?
+  role          String         @default("HR_PRO") // ADMIN, HR_PRO, MENTOR
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  
+  // Relations
+  assignments   InterventionAssignment[] @relation("AssignedTo")
+  mentoring     InterventionAssignment[] @relation("Mentor")
+  createdTemplates InterventionTemplate[] @relation("TemplateAuthor")
+}
+
+// ---------------------------------------------------------
+// 1. DESIGN DOMAIN (Templates)
+// ---------------------------------------------------------
+
+model InterventionTemplate {
+  id          String         @id @default(cuid())
+  title       String
+  description String?
+  version     String         @default("v1.0")
+  status      String         @default("DRAFT") // DRAFT, PUBLISHED, ARCHIVED
+  
+  createdById String
+  createdBy   User           @relation("TemplateAuthor", fields: [createdById], references: [id])
+  
+  tasks       TemplateTask[]
+  
+  // Relations to assignments
+  assignments InterventionAssignment[]
+
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model TemplateTask {
+  id                  String  @id @default(cuid())
+  templateId          String
+  template            InterventionTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  
+  title               String
+  description         String?
+  order               Int
+  defaultDurationDays Int     @default(1)
+  
+  subTasks            TemplateSubTask[]
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model TemplateSubTask {
+  id           String       @id @default(cuid())
+  taskId       String
+  task         TemplateTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  order        Int
+  instruction  String
+}
+
+// ---------------------------------------------------------
+// 2. EXECUTION DOMAIN (Assignments)
+// ---------------------------------------------------------
+
+model InterventionAssignment {
+  id              String      @id @default(cuid())
+  
+  // Link to definition
+  templateId      String
+  template        InterventionTemplate @relation(fields: [templateId], references: [id])
+  
+  // People
+  assignedToId    String
+  assignedTo      User        @relation("AssignedTo", fields: [assignedToId], references: [id])
+  
+  mentorId        String?
+  mentor          User?       @relation("Mentor", fields: [mentorId], references: [id])
+  
+  // Timeline
+  startDate       DateTime
+  calculatedEndDate DateTime?
+  completedDate   DateTime?
+  
+  status          String      @default("ACTIVE") // ACTIVE, PAUSED, COMPLETED, CANCELLED
+  
+  // Work
+  taskExecutions  TaskExecution[]
+  
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model TaskExecution {
+  id              String           @id @default(cuid())
+  assignmentId    String
+  assignment      InterventionAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  
+  // Data copied/linked from TemplateTask
+  title           String 
+  order           Int    
+  
+  startDate       DateTime
+  endDate         DateTime
+  
+  status          String      @default("LOCKED") // LOCKED, ACTIVE, IN_REVIEW, COMPLETED, REJECTED
+  
+  evidenceUrl     String?
+  mentorComment   String?
+  
+  completedAt     DateTime?
+  
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
