@@ -19,18 +19,18 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MOCK_INTERVENTIONS, MOCK_USERS } from "@/lib/data"
-import { InterventionStatus } from "@/types/enums"
+import { MOCK_INSTANCES, MOCK_TEMPLATES, MOCK_USERS } from "@/lib/data"
+import { AssignmentStatus } from "@/types/enums"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export function InterventionList() {
-    const interventions = MOCK_INTERVENTIONS
+    const interventions = MOCK_INSTANCES
 
-    const getStatusBadgeVariant = (status: InterventionStatus) => {
+    const getStatusBadgeVariant = (status: AssignmentStatus) => {
         switch (status) {
-            case InterventionStatus.LIVE: return "default" // Black
-            case InterventionStatus.DRAFT: return "secondary" // Gray
-            case InterventionStatus.COMPLETED: return "secondary" // Greenish (managed via class if needed)
+            case AssignmentStatus.ACTIVE: return "default" // Black
+            case AssignmentStatus.PAUSED: return "secondary" // Gray
+            case AssignmentStatus.COMPLETED: return "secondary" // Greenish (managed via class if needed)
             default: return "outline"
         }
     }
@@ -54,16 +54,17 @@ export function InterventionList() {
                 </TableHeader>
                 <TableBody>
                     {interventions.map((intervention) => {
-                        const assignee = MOCK_USERS.find(u => u.id === intervention.assignedToId)
+                        const template = MOCK_TEMPLATES.find(t => t.id === intervention.templateId)
+                        const assignee = MOCK_USERS.find(u => u.id === intervention.hrProId)
 
                         return (
                             <TableRow key={intervention.id}>
                                 <TableCell className="font-medium">
-                                    <div>{intervention.title}</div>
-                                    <div className="text-xs text-muted-foreground truncate max-w-[200px]">{intervention.description}</div>
+                                    <div>{template?.title || "Unknown Template"}</div>
+                                    <div className="text-xs text-muted-foreground truncate max-w-[200px]">{template?.description}</div>
                                 </TableCell>
                                 <TableCell>
-                                    <Badge variant={getStatusBadgeVariant(intervention.status)}>
+                                    <Badge variant={getStatusBadgeVariant(intervention.status as AssignmentStatus)}>
                                         {intervention.status}
                                     </Badge>
                                 </TableCell>
@@ -86,7 +87,7 @@ export function InterventionList() {
                                     {intervention.startDate ? (
                                         <div className="flex flex-col">
                                             <span>Start: {intervention.startDate.toLocaleDateString()}</span>
-                                            <span className="text-muted-foreground">Target: {intervention.targetCompletionDate?.toLocaleDateString()}</span>
+                                            <span className="text-muted-foreground">Target: {intervention.calculatedEndDate?.toLocaleDateString()}</span>
                                         </div>
                                     ) : (
                                         <span className="text-muted-foreground">Not started</span>
