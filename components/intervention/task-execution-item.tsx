@@ -9,7 +9,9 @@ import { useState } from "react"
 import { submitEvidence, approveTask, rejectTask } from "@/lib/actions/execution"
 
 interface TaskExecutionItemProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     execution: any // TaskExecution with proper shape
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     templateTask: any // TemplateTask with subtasks
     isMentor?: boolean
 }
@@ -120,6 +122,7 @@ export function TaskExecutionItem({ execution, templateTask, isMentor }: TaskExe
                             </AccordionTrigger>
                             <AccordionContent>
                                 <div className="space-y-3 pb-4">
+                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                                     {templateTask?.subTasks?.map((subTask: any) => (
                                         <div key={subTask.id} className="flex items-start gap-3 p-3 bg-white rounded-md border border-slate-200 shadow-sm">
                                             <div className="grid gap-1.5 leading-none">

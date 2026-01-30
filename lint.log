@@ -1,0 +1,67 @@
+﻿
+> hrx-core@0.1.0 lint
+> eslint
+
+
+C:\Users\Hyphy 1\HRG PM\app\admin\layout.tsx
+   9:5   warning  'LogOut' is defined but never used  @typescript-eslint/no-unused-vars
+  11:10  warning  'Button' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\app\admin\page.tsx
+  4:10  warning  'Shield' is defined but never used       @typescript-eslint/no-unused-vars
+  4:45  warning  'CheckCircle' is defined but never used  @typescript-eslint/no-unused-vars
+  4:58  warning  'Clock' is defined but never used        @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\app\admin\templates\page.tsx
+  8:10  warning  'TemplateStatus' is defined but never used   @typescript-eslint/no-unused-vars
+  9:10  warning  'publishTemplate' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\app\admin\users\page.tsx
+  4:10  warning  'UserRole' is defined but never used        @typescript-eslint/no-unused-vars
+  9:10  warning  'revalidatePath' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\app\intervention\[id]\page.tsx
+  28:11  warning  'isAdmin' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\app\mentor\page.tsx
+  12:10  warning  'ResetSessionButton' is defined but never used                                                                                                                          @typescript-eslint/no-unused-vars
+  45:21  error    Do not use an `<a>` element to navigate to `/api/auth/signout/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+C:\Users\Hyphy 1\HRG PM\app\portfolio\[id]\page.tsx
+   3:16  warning  'CardContent' is defined but never used      @typescript-eslint/no-unused-vars
+   3:29  warning  'CardDescription' is defined but never used  @typescript-eslint/no-unused-vars
+   7:46  warning  'ExternalLink' is defined but never used     @typescript-eslint/no-unused-vars
+   9:41  warning  'params' is defined but never used           @typescript-eslint/no-unused-vars
+  35:55  warning  'index' is defined but never used            @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\components\admin\intervention-list.tsx
+  19:5   warning  'DropdownMenuSeparator' is defined but never used     @typescript-eslint/no-unused-vars
+  38:11  warning  'getAssigneeName' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\components\admin\template-editor.tsx
+    7:10  warning  'GripVertical' is defined but never used          @typescript-eslint/no-unused-vars
+    9:70  warning  'updateTemplateDesign' is defined but never used  @typescript-eslint/no-unused-vars
+   19:12  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  100:69  error    Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+
+C:\Users\Hyphy 1\HRG PM\components\intervention\task-execution-item.tsx
+   12:16  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  124:76  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Hyphy 1\HRG PM\lib\actions\assignments.ts
+  6:10  warning  'addDays' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\lib\actions\execution.ts
+  4:10  warning  'TaskExecutionStatus' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\lib\actions\users.ts
+  44:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\lib\auth.ts
+  103:39  warning  'profile' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Hyphy 1\HRG PM\next.config.ts
+  4:3  error  Include a description after the "@ts-expect-error" directive to explain why the @ts-expect-error is necessary. The description must be 3 characters or longer  @typescript-eslint/ban-ts-comment
+
+Γ£û 30 problems (6 errors, 24 warnings)
+

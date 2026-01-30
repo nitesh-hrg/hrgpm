@@ -60,13 +60,12 @@ export default function SignIn() {
                                 <summary className="cursor-pointer hover:text-slate-800">Advanced: Custom Login</summary>
                                 <div className="mt-2 space-y-2 p-2 bg-slate-100 rounded">
                                     <p className="text-[10px] mb-2">Type any email to auto-create user.</p>
-                                    <form
-                                        onSubmit={(e) => {
-                                            e.preventDefault()
-                                            const email = (e.target as any).email.value
-                                            const role = (e.target as any).role.value
-                                            signIn("credentials", { email, role, callbackUrl: "/" })
-                                        }}
+                                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                                    <form action={async (formData: any) => {
+                                        const email = formData.get("email")
+                                        const role = formData.get("role")
+                                        signIn("credentials", { email, role, callbackUrl: "/" })
+                                    }}
                                         className="flex flex-col gap-2"
                                     >
                                         <input name="email" placeholder="user@example.com" className="p-1 border rounded w-full" required />

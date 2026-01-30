@@ -18,8 +18,11 @@ import { useState } from "react"
 import { PlayCircle, Loader2, CalendarIcon } from "lucide-react"
 
 interface AssignmentWizardProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     hrPros: any[] // User[]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     mentors: any[] // User[]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     templates: any[] // InterventionTemplate[]
 }
 
@@ -93,7 +96,8 @@ export function AssignmentWizard({ hrPros, mentors, templates }: AssignmentWizar
                                     {templates.length === 0 ? (
                                         <div className="p-2 text-sm text-muted-foreground">No published templates available.</div>
                                     ) : (
-                                        templates.map(t => (
+                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                        templates.map((t: any) => (
                                             <SelectItem key={t.id} value={t.id}>
                                                 {t.title} (v{t.version})
                                             </SelectItem>

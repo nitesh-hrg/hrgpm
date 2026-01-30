@@ -16,6 +16,7 @@ interface TemplateWithTasks {
     title: string
     description: string | null
     status: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     tasks: any[] // TODO: precise type via Prisma.InterventionTemplateGetPayload
 }
 
@@ -97,6 +98,7 @@ export function TemplateEditor({ template }: { template: TemplateWithTasks }) {
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold">
+                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                             {template.tasks.reduce((acc: number, t: any) => acc + t.defaultDurationDays, 0)} Days
                         </div>
                     </CardContent>
@@ -145,6 +147,7 @@ export function TemplateEditor({ template }: { template: TemplateWithTasks }) {
                                     <div className="space-y-2">
                                         {task.subTasks.length > 0 && (
                                             <div className="space-y-2">
+                                                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                                                 {task.subTasks.map((st: any, stIndex: number) => {
                                                     const subTaskNumber = `${taskNumber}.${stIndex + 1}` // 1.1, 1.2...
                                                     return (

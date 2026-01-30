@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // @ts-ignore
+  // @ts-expect-error: NextConfig type definition mismatch
   eslint: {
     ignoreDuringBuilds: true,
   },

@@ -1,4 +1,5 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link"
 import { AuthGuard } from "@/components/auth-guard"
 import { UserRole } from "@/types/enums"
 import { Button } from "@/components/ui/button"
@@ -42,7 +43,7 @@ export default async function MentorDashboard() {
                 </div>
 
                 <Button asChild variant="outline">
-                    <a href="/api/auth/signout">Sign Out & Retry</a>
+                    <Link href="/api/auth/signout">Sign Out & Retry</Link>
                 </Button>
             </div>
         )
