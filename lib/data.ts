@@ -1,4 +1,4 @@
-import { UserRole, TaskStatus, InterventionStatus } from "@/types/enums"
+import { UserRole, TaskExecutionStatus } from "@/types/enums"
 
 export const MOCK_USERS = [
     { id: "1", name: "Alice Admin", email: "alice@hrx.core", role: UserRole.ADMIN, image: null },
@@ -80,7 +80,7 @@ export interface TaskInstance {
     objective: string // Mapped from description
     startDate: Date
     endDate: Date
-    status: TaskStatus
+    status: TaskExecutionStatus
     evidenceUrl: string | null
     mentorFeedback: string | null
     // We don't need to copy subtasks, we can ref template or copy if needed. 
@@ -122,7 +122,7 @@ export function generateInstance(templateId: string, hrProId: string, startDate:
             objective: taskTpl.description,
             startDate: tStart,
             endDate: tEnd,
-            status: taskTpl.taskNumber === 1 ? TaskStatus.ACTIVE : TaskStatus.LOCKED, // Unlock first task
+            status: taskTpl.taskNumber === 1 ? TaskExecutionStatus.ACTIVE : TaskExecutionStatus.LOCKED, // Unlock first task
             evidenceUrl: null,
             mentorFeedback: null
         })

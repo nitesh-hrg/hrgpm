@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MOCK_INSTANCES, MOCK_TEMPLATES } from "@/lib/data"
-import { TaskStatus } from "@/types/enums"
+import { TaskExecutionStatus } from "@/types/enums"
 import { CheckCircle, ShieldCheck, Calendar, ExternalLink } from "lucide-react"
 
 export default function PortfolioPage({ params }: { params: { id: string } }) {
@@ -13,7 +13,7 @@ export default function PortfolioPage({ params }: { params: { id: string } }) {
 
     if (!instance || !template) return <div>Portfolio not found.</div>
 
-    const completedTasks = instance.taskInstances.filter(t => t.status === TaskStatus.APPROVED)
+    const completedTasks = instance.taskInstances.filter(t => t.status === TaskExecutionStatus.COMPLETED)
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col items-center py-12 px-4 shadow-sm">
