@@ -98,7 +98,7 @@ export interface InterventionInstance {
     taskInstances: TaskInstance[]
 }
 
-export let MOCK_INSTANCES: InterventionInstance[] = []
+export const MOCK_INSTANCES: InterventionInstance[] = []
 
 // --- LOGIC ---
 

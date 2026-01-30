@@ -23,4 +23,5 @@ const prismaMock = {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const prisma = prismaMock as any
