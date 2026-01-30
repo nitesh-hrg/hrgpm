@@ -87,8 +87,8 @@ export const authOptions: NextAuthOptions = {
                 token.id = user.id
                 // @ts-ignore
                 token.role = user.role
-                token.email = user.email
-                token.name = user.name
+                token.email = user.email || undefined
+                token.name = user.name || undefined
             }
             return token
         },
